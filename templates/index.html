@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PE Due Diligence AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <!-- ================================================================
+       HEADER
+  ================================================================ -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-brand">
+        <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+        </svg>
+        <div>
+          <h1 class="brand-title">PE Due Diligence AI</h1>
+          <p class="brand-subtitle">Powered by Gemini 2.0 + ML Scoring</p>
+        </div>
+      </div>
+      <div class="header-badge">
+        <span class="badge-dot"></span>
+        <span>Live</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- ================================================================
+         UPLOAD PANEL
+    ================================================================ -->
+    <section class="upload-panel card">
+      <div id="drop-zone" class="drop-zone">
+        <div class="drop-zone-content">
+          <svg class="drop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          <p class="drop-headline">Drop your documents here</p>
+          <p class="drop-subtext">or <label for="file-input" class="file-label">browse files</label></p>
+          <p class="drop-formats">Supported formats: <strong>PDF</strong> &nbsp;·&nbsp; <strong>DOCX</strong> &nbsp;·&nbsp; <strong>TXT</strong></p>
+        </div>
+        <input id="file-input" type="file" multiple accept=".pdf,.docx,.txt" class="hidden-input" />
+      </div>
+
+      <!-- Selected file list -->
+      <ul id="file-list" class="file-list"></ul>
+
+      <!-- Run Analysis button -->
+      <button id="run-btn" class="run-btn" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+        Run Analysis
+      </button>
+
+      <!-- Loading state -->
+      <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <p class="loading-text">Agent is analysing documents…</p>
+      </div>
+
+      <!-- Error message -->
+      <div id="error-msg" class="error-msg hidden"></div>
+    </section>
+
+    <!-- ================================================================
+         RESULTS PANEL
+    ================================================================ -->
+    <section id="results" class="results hidden">
+
+      <!-- Files analysed pills -->
+      <div id="files-analysed" class="files-analysed"></div>
+
+      <!-- Top row: score + summary -->
+      <div class="results-top">
+
+        <!-- Investment Score Card -->
+        <div class="card score-card">
+          <p class="card-label">Investment Score</p>
+          <div id="score-display" class="score-display">
+            <span id="score-number" class="score-number">—</span>
+            <span class="score-denom">/100</span>
+          </div>
+          <div id="score-bar-wrap" class="score-bar-wrap">
+            <div id="score-bar" class="score-bar"></div>
+          </div>
+          <p id="investment-label" class="investment-label">—</p>
+        </div>
+
+        <!-- Company Summary Card -->
+        <div class="card summary-card">
+          <p class="card-label">Company Summary</p>
+          <p id="company-summary" class="summary-text">—</p>
+        </div>
+
+      </div>
+
+      <!-- Financial Metrics Grid -->
+      <div class="card metrics-card">
+        <p class="card-label">Financial Metrics</p>
+        <div class="metrics-grid">
+          <div class="metric-item">
+            <span class="metric-icon">📈</span>
+            <span class="metric-name">Revenue Growth</span>
+            <span id="m-revenue-growth" class="metric-value">—</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-icon">💰</span>
+            <span class="metric-name">EBITDA Margin</span>
+            <span id="m-ebitda-margin" class="metric-value">—</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-icon">⚖️</span>
+            <span class="metric-name">Debt / Equity</span>
+            <span id="m-debt-equity" class="metric-value">—</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-icon">🌐</span>
+            <span class="metric-name">Market Size</span>
+            <span id="m-market-size" class="metric-value">—</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-icon">📅</span>
+            <span class="metric-name">Founded</span>
+            <span id="m-founding-year" class="metric-value">—</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-icon">👥</span>
+            <span class="metric-name">Team Size</span>
+            <span id="m-team-size" class="metric-value">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Risks -->
+      <div class="card risks-card">
+        <p class="card-label">Key Risks Identified</p>
+        <ul id="risks-list" class="risks-list"></ul>
+      </div>
+
+      <!-- Recommendation -->
+      <div id="recommendation-card" class="card recommendation-card">
+        <p class="card-label">Recommendation</p>
+        <p id="recommendation-text" class="recommendation-text">—</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
