@@ -3,14 +3,6 @@
 A full-stack Python web application that evaluates uploaded documents (PDF, DOCX, or TXT) via a retrieval-augmented generation (RAG) pipeline and an AI agent to automatically generate a structured private equity due diligence report complete with financial metric extraction, ML investment scoring, risk analysis, and an executive recommendation.
 ---
 
-## Prerequisites
-
-- **Python 3.11** (or 3.12) with `pip`
-- **Docker** and **docker-compose**
-- A valid **Gemini API key** from [Google AI Studio](https://aistudio.google.com/app/apikey)
-
----
-
 ## Setup Instructions
 
 1. **Clone the repository and enter the project directory**
