@@ -1,7 +1,6 @@
 # PE Due Diligence AI
 
-A full-stack Python web application that evaluates uploaded documents (PDF, DOCX, or TXT) via a retrieval-augmented generation (RAG) pipeline and an AI agent to automatically generate a structured private equity due diligence report — complete with financial metric extraction, ML investment scoring, risk analysis, and an executive recommendation — all rendered in a polished dark-theme dashboard.
-
+A full-stack Python web application that evaluates uploaded documents (PDF, DOCX, or TXT) via a retrieval-augmented generation (RAG) pipeline and an AI agent to automatically generate a structured private equity due diligence report complete with financial metric extraction, ML investment scoring, risk analysis, and an executive recommendation.
 ---
 
 ## Prerequisites
